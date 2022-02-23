@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
-function App() {
+const App = () => {
+  const [users, setUsers] = React.useState([
+    { id: 'a', name: 'Robin' },
+    { id: 'b', name: 'Dennis' }
+  ]);
+
+  const [text, setText] = React.useState('');
+
+  const handleText = (event) => {
+    setText(event.target.value);
+  };
+
+  const handleAddUser = () => {
+    setUsers(users.concat({ id: uuidv4(), name: text }));
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <input type="text" value={text} onChange={handleText} />
+      <button type="button" onClick={handleAddUser}>
+        Add User
+      </button>
+
+      <List list={users} />
     </div>
   );
-}
+};
+
+const List = ({ list }) => {
+  return (
+    <ul>
+      {list.map((item) => (
+        <ListItem key={item.id} item={item} />
+      ))}
+    </ul>
+  );
+};
+
+const ListItem = ({ item }) => {
+  return <li>{item.name}</li>;
+};
 
 export default App;
