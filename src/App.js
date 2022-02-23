@@ -2,6 +2,8 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 const App = () => {
+  console.log('Render: App');
+
   const [users, setUsers] = React.useState([
     { id: 'a', name: 'Robin' },
     { id: 'b', name: 'Dennis' }
@@ -30,6 +32,7 @@ const App = () => {
 };
 
 const List = ({ list }) => {
+  console.log('Render: List');
   return (
     <ul>
       {list.map((item) => (
@@ -40,6 +43,7 @@ const List = ({ list }) => {
 };
 
 const ListItem = ({ item }) => {
+  console.log('Render: ListItem');
   return <li>{item.name}</li>;
 };
 
